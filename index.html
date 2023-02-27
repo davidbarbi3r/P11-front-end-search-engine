@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/search.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="assets/petitplats.svg">
+    <title>Les petits plats</title>
+  </head>
+  <body>
+    <header>
+      <img src="assets/petitplats.svg" alt="logo" />
+      <h1>Les petits plats</h1>
+    </header>
+    <main>
+      <section class="search_container">
+        <input type="search" placeholder="Rechercher" id="search"></input>
+        <select type="select" placeholder="Ingrédients" id="ingredients"></select>
+        <select type="select" placeholder="Appareils" id="appliance"></select>
+        <select type="select" placeholder="Ustensiles" id="ustensils"></select>
+      </section>
+      <section class="recipes_container"></section>
+    </main>
+    <script type="module" src="/script/index.js"></script>
+  </body>
+</html>
