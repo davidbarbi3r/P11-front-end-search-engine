@@ -1,17 +1,66 @@
-input {
-  width: 100%;
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  font-family: "DM Sans", sans-serif;
+.container_logo {
+    display: flex;
+    padding: 0.9rem;
+    margin:auto;
 }
 
-select {
-  width: 20%;
-  margin-top: 1rem;
-  margin-right: 1rem;
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  font-family: "DM Sans", sans-serif;
+label img .container_logo {
+  width: 16px;
+  position:relative;
+  padding-top: 3px;
+}
+
+.input_control, input_control-row input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: #E7E7E7;
+  padding:15px;
+  border-radius: 6px;
+  margin-bottom: 35px;
+}
+
+.input_control input {
+  width: 100%;
+  font-size: 18px;
+  padding-left:10px;
+  outline: 0;
+  border:0;
+  background: #E7E7E7;
+  font-family: sans-serif, verdana;
+  color: white;
+}
+.tags_container {
+  align-items: flex-start;
+  justify-content: left;
+  display: flex;
+}
+.input_control_2 {
+  margin-right: 25px;
+  background-color: #3282F7;
+}
+.input_control_2 input {
+  background-color:#3282F7;
+}
+.input_control_3 {
+  margin-right: 25px;
+  background-color: #68D9A4;
+} 
+.input_control_3 input {
+  background-color:#68D9A4;
+}
+.input_control_4{
+  background-color: #ED6454;
+}
+.input_control_4 input {
+  background-color: #ED6454;
+ 
+}
+.input_control_4 input::placeholder, .input_control_3 input::placeholder, .input_control_2 input::placeholder {
+  color:white;
+  padding-right: 23px;
+} 
+.width_chevron {
+  width: 0.9rem;
 }
