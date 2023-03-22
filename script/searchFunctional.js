@@ -1,5 +1,8 @@
 export const searchFunctional = (search, recipes) => {
-    const filteredRecipes = recipes.filter((recipe) => {
+      if (!search){
+        return recipes;
+      }
+      const filteredRecipes = recipes.filter((recipe) => {
         return recipe.name.toLowerCase().includes(search.toLowerCase());
       });
       const filteredRecipesByIngredients = recipes.filter((recipe) => {
