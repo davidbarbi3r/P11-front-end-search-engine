@@ -1,20 +1,34 @@
 import { recipes } from "/script/recipes.js";
 import { searchFunctional } from "/script/searchFunctional.js";
+import { recipesContainerRender } from "/script/recipesContainerRender.js";
+import { 
+  filterAppliance, 
+  filterIngredients, 
+  filterUstensils, 
+  getIngredients,
+  getAppliance, 
+  getUstensils
+} from "./tagsFilters/index.js";
 
-const SEARCH_MODE = "functional"
+const SEARCH_MODE = "functional";
 
 const search = document.querySelector("#main_search");
+const ingredientsFilter = document.querySelector("#filter_ingredients");
+const applianceFilter = document.querySelector("#filter_appliance");
+const ustensilsFilter = document.querySelector("#filter_ustensils")
+const recipesContainer = document.querySelector(".recipes_container");
+const ingredientsInput = document.querySelector("#ingredients_input");
+let filteredRecipes = recipes;
 /* Listening for a keyup event on the search input. */
 search.addEventListener("keyup", () => {
   const searchValue = search.value;
-  let filteredRecipes
 
   if (searchValue.length < 3) {
-    return;
+    return recipes;
   }
 
-  if (SEARCH_MODE === "functional"){
-    filteredRecipes = searchFunctional(searchValue, recipes)
+  if (SEARCH_MODE === "functional") {
+    filteredRecipes = searchFunctional(searchValue, recipes);
   } else {
     // native logic
     const recipesTest = structuredClone(recipes);
@@ -22,41 +36,54 @@ search.addEventListener("keyup", () => {
       return element.name;
     }
   }
-  console.log(filteredRecipes)
+  console.log(filteredRecipes);
   // render
-  const recipesContainer = document.querySelector(".recipes_container")
-  recipesContainer.innerHTML = `
-    ${filteredRecipes.map((recipe) => {
-      return `
-      <article>
-        <div class="img_container"></div>
-        <div>
-          <div>
-            <h2>${recipe.name}</h2>
-            <p>
-              <img src="/assets/time.svg" alt="clock logo"/>
-              ${recipe.time} min
-            </p>   
-          </div>
-          <div>
-            <div>${recipe.ingredients.map((i) => {
-              return `
-              <p>
-              ${i.ingredient}
-              ${i.quantity ? (": " + i.quantity + " "+ i.unit):""}
-              </p>   
-            `})}
-            </div>
-            <div>${recipe.description}</div>
-          </div>
-        </div>
-      </article>`
-    })}
-  `
+  if (filteredRecipes.length) {
+    recipesContainer.innerHTML = recipesContainerRender(filteredRecipes);
+  } else {
+    recipesContainer.innerHTML = `
+    « Aucune recette ne correspond à votre critère… 
+    vous pouvez chercher « tarte aux pommes », « poisson », etc.`
+  }
 });
-const array = [{test: "test"}, {test:"test"}]
-// log an array of test propertie values
-console.log(array.map((element) => element.test))
-console.log()
 
+let filteredIngredients = getIngredients(recipes, "")
+ingredientsFilter.addEventListener("keyup", () => {
+  const searchValue = ingredientsFilter.value;
+
+  const ingredientsLeft = filterIngredients(filteredRecipes, searchValue)
+  filteredIngredients = getIngredients(recipes, searchValue)
+  console.log(filteredIngredients)
+});
+
+const ingredientsContainer = document.createElement("div")
+ingredientsInput.appendChild(ingredientsContainer)
+ingredientsContainer.className = "ingredients_container"
+
+ingredientsFilter.addEventListener("click", () => {
+  console.log("open div")
+  ingredientsContainer.classList.add("open")
+  // on click outside how to close ?
+  ingredientsContainer.innerHTML = filteredIngredients.map((ingredient) => {
+    `
+      <span>${ingredient}</span>
+    `
+  })
+})
+
+applianceFilter.addEventListener("keyup", () => {
+  const searchValue = applianceFilter.value;
+  console.log(getAppliance(recipes, searchValue))
+
+});
+
+ustensilsFilter.addEventListener("keyup", () => {
+  const searchValue = ustensilsFilter.value;
+  console.log(getUstensils(recipes, searchValue))
+
+});
+
+
+
+recipesContainer.innerHTML = recipesContainerRender(filteredRecipes);
 
