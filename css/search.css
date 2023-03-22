@@ -4,9 +4,21 @@
     margin:auto;
 }
 
+.input_control.input_control_1 {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #E7E7E7;
+    padding:15px;
+    border-radius: 6px;
+    margin-bottom: 35px;
+}
+
 label img .container_logo {
   width: 16px;
-  position:relative;
+  /* position:relative; */
   padding-top: 3px;
 }
 
@@ -14,7 +26,6 @@ label img .container_logo {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   background: #E7E7E7;
   padding:15px;
   border-radius: 6px;
@@ -22,14 +33,13 @@ label img .container_logo {
 }
 
 .input_control input {
-  width: 100%;
   font-size: 18px;
   padding-left:10px;
   outline: 0;
   border:0;
   background: #E7E7E7;
   font-family: sans-serif, verdana;
-  color: white;
+  color: black;
 }
 .tags_container {
   align-items: flex-start;
@@ -63,4 +73,24 @@ label img .container_logo {
 } 
 .width_chevron {
   width: 0.9rem;
+}
+
+#ingredients_input {
+  position:relative;
+}
+
+.ingredients_container {
+  display: block;
+  flex-wrap: wrap;
+  background-color: #3282F7;
+  padding: 10px;
+  border-radius: 6px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 0;
+}
+
+.open {
+  display: flex;
 }
