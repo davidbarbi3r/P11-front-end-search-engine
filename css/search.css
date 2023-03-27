@@ -137,6 +137,11 @@ label img .container_logo {
   border-radius: 6px;
 }
 
+.tag_btn {
+  display: flex;
+  align-items: center;
+}
+
 .open {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

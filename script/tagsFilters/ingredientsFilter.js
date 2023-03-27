@@ -1,13 +1,37 @@
 import { renderTags } from "./index.js";
+import { searchFunctional } from "../searchFunctional.js";
+import { recipesContainerRender } from "../recipesContainerRender.js";
 
-export function filterIngredients (recipes, search){
-  const filteredRecipesByIngredients = recipes.filter((recipe) => {
-    return recipe.ingredients.map((ingredient) => ingredient.ingredient).join(" ").includes(search.toLowerCase())
-  });
-  return filteredRecipesByIngredients
+export function filterIngredients (recipes, tagsArray){
+  const ingredientsArray = tagsArray.map((tag) => {
+    if (tag.type === "ingredient"){
+      return tag.tag
+    }
+  })
+  
+  if (!tagsArray.length){
+    return recipes
+  }
+  return recipes.filter((recipe) => {
+    return recipe.ingredients.map((ingredient) => ingredient.ingredient).join(" ").includes(ingredientsArray.join(" "))
+  })
 }
 
 export function getIngredients (recipes, search){
+  if (!search){
+    return recipes
+      .map(
+        (recipe) => recipe.ingredients
+        .map((ingredient) => ingredient.ingredient)
+      )
+      .flat()
+      .reduce((acc,cur) => {
+        if (!acc.includes(cur)){
+          acc.push(cur)
+        }
+        return acc
+      }, [])
+  }
   return recipes
     .map(
       (recipe) => recipe.ingredients
@@ -40,7 +64,10 @@ export function renderIngredients (recipes, search, containerEl, tagsList, tags)
         tag: el.innerText,
         type: "ingredient"
       })
-      renderTags(tagsList, tags)
+      renderTags(tagsList, tags, recipes)
+      const filteredRecipes = searchFunctional(search, recipes, tagsList)
+      const recipesContainer = document.querySelector(".recipes_container");
+      recipesContainer.innerHTML = recipesContainerRender(filteredRecipes)
     })
   })
   return filteredIngredients

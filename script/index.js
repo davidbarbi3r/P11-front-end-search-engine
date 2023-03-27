@@ -27,17 +27,18 @@ const tags = document.querySelector(".tags_list")
 const tagsList = []
 let filteredRecipes = recipes;
 /* Listening for a keyup event on the search input. */
+
 search.addEventListener("keyup", () => {
   const searchValue = search.value;
 
   if (searchValue.length < 3) {
-    return filteredRecipes;
+    filteredRecipes = searchFunctional("", recipes, tagsList);
+    renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
   }
 
   if (SEARCH_MODE === "functional") {
-    filteredRecipes = searchFunctional(searchValue, recipes);
-    renderIngredients(filteredRecipes, searchValue, ingredientsContainer, tagsList, tags)
-
+    filteredRecipes = searchFunctional(searchValue, recipes, tagsList);
+    renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
   } else {
     // native logic
     const recipesTest = structuredClone(recipes);
@@ -58,10 +59,8 @@ search.addEventListener("keyup", () => {
 let filteredIngredients = getIngredients(recipes, "")
 ingredientsFilter.addEventListener("keyup", () => {
   const searchValue = ingredientsFilter.value;
-  if(searchValue.length >= 3){
-    renderIngredients(filteredRecipes, searchValue, ingredientsContainer, tagsList, tags)
-    recipesContainerRender(filteredRecipes);
-  }
+  renderIngredients(filteredRecipes, searchValue, ingredientsContainer, tagsList, tags)
+  recipesContainerRender(filteredRecipes);
 });
 
 const ingredientsContainer = document.createElement("div")

@@ -1,4 +1,6 @@
-export function renderTags (tagsList, tags){
+import { recipesContainerRender } from "../recipesContainerRender.js";
+
+export function renderTags (tagsList, tags, recipes){
     // render tags from tagsList
     tags.innerHTML = tagsList.map((tag) => {
         return `
@@ -14,7 +16,9 @@ export function renderTags (tagsList, tags){
     closeBtn.forEach((el, key) => {
         el.addEventListener("click", () => {
             tagsList.splice(key, 1);
-            renderTags(tagsList, tags);
+            renderTags(tagsList, tags, recipes);
+            const recipesContainer = document.querySelector(".recipes_container");
+            recipesContainer.innerHTML = recipesContainerRender(recipes);
         })
     })
 }
