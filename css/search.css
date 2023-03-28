@@ -119,6 +119,33 @@ label img .container_logo {
   cursor: pointer;
 }
 
+.appliance_container {
+  display: none;
+  background-color: #68D9A4;
+  text-align: left;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 10px;
+  border-radius: 6px;
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  top: 45px;
+  left: 0;
+  z-index: 1;
+}
+
+.appliance_container button {
+  border: none;
+  color: white;
+  background-color: #68D9A4;
+}
+
+.appliance_container button:hover {
+  background-color: #4DBF7F;
+  cursor: pointer;
+}
+
 .tags_list {
   display: flex;
   flex-wrap: wrap;

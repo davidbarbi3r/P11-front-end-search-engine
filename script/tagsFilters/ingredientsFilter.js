@@ -2,21 +2,6 @@ import { renderTags } from "./index.js";
 import { searchFunctional } from "../searchFunctional.js";
 import { recipesContainerRender } from "../recipesContainerRender.js";
 
-export function filterIngredients (recipes, tagsArray){
-  const ingredientsArray = tagsArray.map((tag) => {
-    if (tag.type === "ingredient"){
-      return tag.tag
-    }
-  })
-  
-  if (!tagsArray.length){
-    return recipes
-  }
-  return recipes.filter((recipe) => {
-    return recipe.ingredients.map((ingredient) => ingredient.ingredient).join(" ").includes(ingredientsArray.join(" "))
-  })
-}
-
 export function getIngredients (recipes, search){
   if (!search){
     return recipes

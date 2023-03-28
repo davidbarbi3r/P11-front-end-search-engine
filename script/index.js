@@ -2,14 +2,12 @@ import { recipes } from "/script/recipes.js";
 import { searchFunctional } from "/script/searchFunctional.js";
 import { recipesContainerRender } from "/script/recipesContainerRender.js";
 import { 
-  filterAppliance, 
-  filterIngredients, 
-  filterUstensils, 
   getIngredients,
   getAppliance, 
   getUstensils,
   renderIngredients
 } from "./tagsFilters/index.js";
+import { renderApplicance } from "./tagsFilters/applianceFilter.js";
 
 const SEARCH_MODE = "functional";
 
@@ -19,6 +17,7 @@ const applianceFilter = document.querySelector("#filter_appliance");
 const ustensilsFilter = document.querySelector("#filter_ustensils")
 const recipesContainer = document.querySelector(".recipes_container");
 const ingredientsInput = document.querySelector("#ingredients_input");
+const applianceInput = document.querySelector("#appliance_input");
 const chevronIngredients = document.querySelector("#chevron_ingredients");
 const chevronAppliance = document.querySelector("#chevron_appliance");
 const chevronUstensils = document.querySelector("#chevron_ustensils");
@@ -34,6 +33,7 @@ search.addEventListener("keyup", () => {
   if (searchValue.length < 3) {
     filteredRecipes = searchFunctional("", recipes, tagsList);
     renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
+    renderApplicance(filteredRecipes, "", applianceContainer, tagsList, tags)
   }
 
   if (SEARCH_MODE === "functional") {
@@ -56,7 +56,6 @@ search.addEventListener("keyup", () => {
   }
 });
 
-let filteredIngredients = getIngredients(recipes, "")
 ingredientsFilter.addEventListener("keyup", () => {
   const searchValue = ingredientsFilter.value;
   renderIngredients(filteredRecipes, searchValue, ingredientsContainer, tagsList, tags)
@@ -67,7 +66,6 @@ const ingredientsContainer = document.createElement("div")
 ingredientsInput.appendChild(ingredientsContainer)
 ingredientsContainer.className = "ingredients_container"
 renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
-
 
 chevronIngredients.addEventListener("click", () => {
   // open the ingredients list when clicked
@@ -81,11 +79,33 @@ chevronIngredients.addEventListener("click", () => {
   chevronIngredients.classList.remove("rotate");
 })
 
+const applianceContainer = document.createElement("div")
+applianceInput.appendChild(applianceContainer)
+applianceContainer.className = "appliance_container"
+renderApplicance(filteredRecipes, "", applianceContainer, tagsList, tags)
+
+chevronAppliance.addEventListener("click", () => {
+  // open the appliance list when clicked
+  applianceContainer.className === "appliance_container" ?
+  applianceContainer.classList.add("open") :
+  applianceContainer.classList.remove("open")
+
+  // rotate chevron when open
+  chevronAppliance.className === "" ?
+  chevronAppliance.classList.add("rotate") :
+  chevronAppliance.classList.remove("rotate");
+})
+
 applianceFilter.addEventListener("keyup", () => {
   const searchValue = applianceFilter.value;
-  if(searchValue.length >= 3){
-    console.log(getAppliance(recipes, searchValue))
+  if(searchValue.length < 3){
+    renderApplicance(filteredRecipes, "", applianceContainer, tagsList, tags)
+    recipesContainerRender(filteredRecipes);
+  } else {
+    renderApplicance(filteredRecipes, searchValue, applianceContainer, tagsList, tags)
+    recipesContainerRender(filteredRecipes);
   }
+
 });
 
 ustensilsFilter.addEventListener("keyup", () => {
