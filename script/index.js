@@ -2,12 +2,10 @@ import { recipes } from "/script/recipes.js";
 import { searchFunctional } from "/script/searchFunctional.js";
 import { recipesContainerRender } from "/script/recipesContainerRender.js";
 import { 
-  getIngredients,
-  getAppliance, 
-  getUstensils,
+  renderAppliance,
+  renderUstensils,
   renderIngredients
 } from "./tagsFilters/index.js";
-import { renderApplicance } from "./tagsFilters/applianceFilter.js";
 
 const SEARCH_MODE = "functional";
 
@@ -18,6 +16,7 @@ const ustensilsFilter = document.querySelector("#filter_ustensils")
 const recipesContainer = document.querySelector(".recipes_container");
 const ingredientsInput = document.querySelector("#ingredients_input");
 const applianceInput = document.querySelector("#appliance_input");
+const ustensilsInput = document.querySelector("#ustensils_input");
 const chevronIngredients = document.querySelector("#chevron_ingredients");
 const chevronAppliance = document.querySelector("#chevron_appliance");
 const chevronUstensils = document.querySelector("#chevron_ustensils");
@@ -33,12 +32,15 @@ search.addEventListener("keyup", () => {
   if (searchValue.length < 3) {
     filteredRecipes = searchFunctional("", recipes, tagsList);
     renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
-    renderApplicance(filteredRecipes, "", applianceContainer, tagsList, tags)
+    renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
+    renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
   }
 
   if (SEARCH_MODE === "functional") {
     filteredRecipes = searchFunctional(searchValue, recipes, tagsList);
     renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
+    renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
+    renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
   } else {
     // native logic
     const recipesTest = structuredClone(recipes);
@@ -82,7 +84,7 @@ chevronIngredients.addEventListener("click", () => {
 const applianceContainer = document.createElement("div")
 applianceInput.appendChild(applianceContainer)
 applianceContainer.className = "appliance_container"
-renderApplicance(filteredRecipes, "", applianceContainer, tagsList, tags)
+renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
 
 chevronAppliance.addEventListener("click", () => {
   // open the appliance list when clicked
@@ -99,19 +101,39 @@ chevronAppliance.addEventListener("click", () => {
 applianceFilter.addEventListener("keyup", () => {
   const searchValue = applianceFilter.value;
   if(searchValue.length < 3){
-    renderApplicance(filteredRecipes, "", applianceContainer, tagsList, tags)
+    renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
     recipesContainerRender(filteredRecipes);
   } else {
-    renderApplicance(filteredRecipes, searchValue, applianceContainer, tagsList, tags)
+    renderAppliance(filteredRecipes, searchValue, applianceContainer, tagsList, tags)
     recipesContainerRender(filteredRecipes);
   }
-
 });
+
+const ustensilsContainer = document.createElement("div")
+ustensilsInput.appendChild(ustensilsContainer)
+ustensilsContainer.className = "ustensils_container"
+renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
+
+chevronUstensils.addEventListener("click", () => {
+  // open the ustensils list when clicked
+  ustensilsContainer.className === "ustensils_container" ?
+  ustensilsContainer.classList.add("open") :
+  ustensilsContainer.classList.remove("open")
+
+  // rotate chevron when open
+  chevronUstensils.className === "" ?
+  chevronUstensils.classList.add("rotate") :
+  chevronUstensils.classList.remove("rotate");
+})
 
 ustensilsFilter.addEventListener("keyup", () => {
   const searchValue = ustensilsFilter.value;
-  if(searchValue.length >= 3){
-    console.log(getUstensils(recipes, searchValue))
+  if(searchValue.length < 3){
+    renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
+    recipesContainerRender(filteredRecipes);
+  } else {
+    renderUstensils(filteredRecipes, searchValue, ustensilsContainer, tagsList, tags)
+    recipesContainerRender(filteredRecipes);
   }
 });
 

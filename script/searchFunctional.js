@@ -51,9 +51,79 @@ export const searchFunctional = (search, recipes, tagsArray) => {
   if (!tagsArray.length) {
     return searchedRecipes;
   }
+
+  let filteredRecipesByTags = searchedRecipes;
   // return recipes that contain all ingredients in tags
-  if(ingredientsTags.length > 0){
-    return searchedRecipes.filter((recipe) => {
+  if(ingredientsTags.length && applianceTags.length && ustensilsTags.length){
+    filteredRecipesByTags = searchedRecipes.filter((recipe) => {
+      return ingredientsTags.every((ingredient) => {
+        return recipe.ingredients.some((recipeIngredient) => {
+          return (
+            recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()
+          );
+        });
+      });
+    }).filter((recipe) => {
+      return applianceTags.every((appliance) => {
+        return recipe.appliance.toLowerCase() === appliance.toLowerCase();
+      });
+    }).filter((recipe) => {
+      return ustensilsTags.every((ustensil) => {
+        return recipe.ustensils.some((recipeUstensil) => {
+          return recipeUstensil.toLowerCase() === ustensil.toLowerCase();
+        });
+      });
+    }
+    )
+    return filteredRecipesByTags;
+  } else if (ingredientsTags.length && applianceTags.length) {
+    filteredRecipesByTags = searchedRecipes.filter((recipe) => {
+      return ingredientsTags.every((ingredient) => {
+        return recipe.ingredients.some((recipeIngredient) => {
+          return (
+            recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()
+          );
+        });
+      });
+    }).filter((recipe) => {
+      return applianceTags.every((appliance) => {
+        return recipe.appliance.toLowerCase() === appliance.toLowerCase();
+      });
+    });
+    return filteredRecipesByTags;
+  } else if (ingredientsTags.length && ustensilsTags.length) {
+    filteredRecipesByTags = searchedRecipes.filter((recipe) => {
+      return ingredientsTags.every((ingredient) => {
+        return recipe.ingredients.some((recipeIngredient) => {
+          return (
+            recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()
+          );
+        });
+      });
+    }).filter((recipe) => {
+      return ustensilsTags.every((ustensil) => {
+        return recipe.ustensils.some((recipeUstensil) => {
+          return recipeUstensil.toLowerCase() === ustensil.toLowerCase();
+        });
+      });
+    });
+    return filteredRecipesByTags;
+  } else if (applianceTags.length && ustensilsTags.length) {
+    filteredRecipesByTags = searchedRecipes.filter((recipe) => {
+      return applianceTags.every((appliance) => {
+        return recipe.appliance.toLowerCase() === appliance.toLowerCase();
+      });
+    }).filter((recipe) => {
+      return ustensilsTags.every((ustensil) => {
+        return recipe.ustensils.some((recipeUstensil) => {
+          return recipeUstensil.toLowerCase() === ustensil.toLowerCase();
+        });
+      });
+    });
+    return filteredRecipesByTags;
+  }
+  if (ingredientsTags.length > 0) {
+    filteredRecipesByTags = searchedRecipes.filter((recipe) => {
       return ingredientsTags.every((ingredient) => {
         return recipe.ingredients.some((recipeIngredient) => {
           return (
@@ -62,12 +132,26 @@ export const searchFunctional = (search, recipes, tagsArray) => {
         });
       });
     });
+    return filteredRecipesByTags;
   }
   if (applianceTags.length > 0) {
-    return searchedRecipes.filter((recipe) => {
+    filteredRecipesByTags = searchedRecipes.filter((recipe) => {
       return applianceTags.every((appliance) => {
         return recipe.appliance.toLowerCase() === appliance.toLowerCase();
       });
     });
+    return filteredRecipesByTags;
   }
+  if (ustensilsTags.length > 0) {
+    filteredRecipesByTags = searchedRecipes.filter((recipe) => {
+      return ustensilsTags.every((ustensil) => {
+        return recipe.ustensils.some((recipeUstensil) => {
+          return recipeUstensil.toLowerCase() === ustensil.toLowerCase();
+        });
+      });
+    });
+    return filteredRecipesByTags;
+  }
+  
+  return filteredRecipesByTags;
 };

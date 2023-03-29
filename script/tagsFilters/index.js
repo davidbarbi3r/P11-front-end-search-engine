@@ -1,4 +1,4 @@
-export {filterAppliance, getAppliance} from "./applianceFilter.js"
-export {filterUstensils, getUstensils} from "./ustensilsFilter.js"
+export {getAppliance, renderAppliance} from "./applianceFilter.js"
+export {getUstensils, renderUstensils} from "./ustensilsFilter.js"
 export {getIngredients, renderIngredients} from "./ingredientsFilter.js"
 export {renderTags} from "./renderTags.js"

@@ -33,7 +33,7 @@ export function getAppliance (recipes, search){
   return filteredAppliance
 }
 
-export function renderApplicance (recipes, search, containerEl, tagsList, tags) {
+export function renderAppliance (recipes, search, containerEl, tagsList, tags) {
   const filteredAppliance = getAppliance(recipes, search)
   containerEl.innerHTML = filteredAppliance.map((appliance) => {
     return `
@@ -49,7 +49,7 @@ export function renderApplicance (recipes, search, containerEl, tagsList, tags) 
         tag: el.innerText,
         type: "appliance"
       })
-      renderTags(tagsList, tags, recipes)
+      renderTags(tagsList, tags, recipes, search)
       const filteredRecipes = searchFunctional(search, recipes, tagsList)
       const recipesContainer = document.querySelector(".recipes_container");
       recipesContainer.innerHTML = recipesContainerRender(filteredRecipes)
@@ -57,3 +57,5 @@ export function renderApplicance (recipes, search, containerEl, tagsList, tags) 
   })
   return filteredAppliance
 }
+
+

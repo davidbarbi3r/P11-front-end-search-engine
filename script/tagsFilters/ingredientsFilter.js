@@ -49,7 +49,7 @@ export function renderIngredients (recipes, search, containerEl, tagsList, tags)
         tag: el.innerText,
         type: "ingredient"
       })
-      renderTags(tagsList, tags, recipes)
+      renderTags(tagsList, tags, recipes, search)
       const filteredRecipes = searchFunctional(search, recipes, tagsList)
       const recipesContainer = document.querySelector(".recipes_container");
       recipesContainer.innerHTML = recipesContainerRender(filteredRecipes)
