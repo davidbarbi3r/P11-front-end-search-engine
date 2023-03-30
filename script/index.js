@@ -6,8 +6,9 @@ import {
   renderUstensils,
   renderIngredients
 } from "./tagsFilters/index.js";
+import { nativeSearch } from "./nativeSearch.js";
 
-const SEARCH_MODE = "functional";
+const SEARCH_MODE = "native";
 
 const search = document.querySelector("#main_search");
 const ingredientsFilter = document.querySelector("#filter_ingredients");
@@ -43,10 +44,10 @@ search.addEventListener("keyup", () => {
     renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
   } else {
     // native logic
-    const recipesTest = structuredClone(recipes);
-    for (const element of recipesTest) {
-      return element.name;
-    }
+    filteredRecipes = nativeSearch(searchValue, recipes, tagsList);
+    renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
+    renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
+    renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
   }
   // render
   if (filteredRecipes.length) {
