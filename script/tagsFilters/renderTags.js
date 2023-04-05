@@ -1,9 +1,13 @@
 import { recipesContainerRender } from "../recipesContainerRender.js";
 import { searchFunctional } from "../searchFunctional.js";
-import { renderIngredients } from "./index.js";
+import { toggleAppliance } from "./applianceFilter.js";
+import { renderAppliance, renderIngredients } from "./index.js";
+import { toggleIngredients } from "./ingredientsFilter.js";
+import { toggleUstensils } from "./ustensilsFilter.js";
 
-export function renderTags(tagsList, tags, recipes, search) {
+export function renderTags(tagsList, recipes, search) {
   // render tags from tagsList
+  const tags = document.querySelector(".tags_list")
   tags.innerHTML = tagsList
     .map((tag) => {
       return `
@@ -20,10 +24,14 @@ export function renderTags(tagsList, tags, recipes, search) {
   closeBtn.forEach((el, key) => {
     el.addEventListener("click", () => {
       tagsList.splice(key, 1);
-      renderTags(tagsList, tags, recipes, search);
+      renderTags(tagsList, recipes, search);
       const filteredRecipes = searchFunctional(search, recipes, tagsList)
+      toggleUstensils(filteredRecipes, tagsList)
+      toggleIngredients(filteredRecipes, tagsList)
+      toggleAppliance(filteredRecipes, tagsList)
       const recipesContainer = document.querySelector(".recipes_container");
       recipesContainer.innerHTML = recipesContainerRender(filteredRecipes);
     });
-  });
+  });  
 }
+

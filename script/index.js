@@ -8,7 +8,7 @@ import {
 } from "./tagsFilters/index.js";
 import { nativeSearch } from "./nativeSearch.js";
 
-const SEARCH_MODE = "native";
+const SEARCH_MODE = "functional";
 
 const search = document.querySelector("#main_search");
 const ingredientsFilter = document.querySelector("#filter_ingredients");
@@ -21,7 +21,6 @@ const ustensilsInput = document.querySelector("#ustensils_input");
 const chevronIngredients = document.querySelector("#chevron_ingredients");
 const chevronAppliance = document.querySelector("#chevron_appliance");
 const chevronUstensils = document.querySelector("#chevron_ustensils");
-const ingredientBtn = document.querySelector(".ingredient_btn");
 const tags = document.querySelector(".tags_list")
 const tagsList = []
 let filteredRecipes = recipes;
@@ -30,20 +29,26 @@ let filteredRecipes = recipes;
 search.addEventListener("keyup", () => {
   const searchValue = search.value;
 
-  if (searchValue.length < 3) {
-    filteredRecipes = searchFunctional("", recipes, tagsList);
-    renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
-    renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
-    renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
-  }
-
   if (SEARCH_MODE === "functional") {
+    // functional logic
+    if (searchValue.length < 3) {
+      filteredRecipes = searchFunctional("", recipes, tagsList);
+      renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
+      renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
+      renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
+    }
     filteredRecipes = searchFunctional(searchValue, recipes, tagsList);
     renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
     renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
     renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
   } else {
     // native logic
+    if (searchValue.length < 3) {
+      filteredRecipes = nativeSearch("", recipes, tagsList);
+      renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
+      renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
+      renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
+    }
     filteredRecipes = nativeSearch(searchValue, recipes, tagsList);
     renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
     renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
@@ -61,13 +66,17 @@ search.addEventListener("keyup", () => {
 
 ingredientsFilter.addEventListener("keyup", () => {
   const searchValue = ingredientsFilter.value;
-  renderIngredients(filteredRecipes, searchValue, ingredientsContainer, tagsList, tags)
-  recipesContainerRender(filteredRecipes);
+  if(searchValue.length < 3){
+    renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
+  } else {  
+    renderIngredients(filteredRecipes, searchValue, ingredientsContainer, tagsList, tags)
+  }
 });
 
 const ingredientsContainer = document.createElement("div")
 ingredientsInput.appendChild(ingredientsContainer)
 ingredientsContainer.className = "ingredients_container"
+ingredientsContainer.id = "ingredients_container"
 renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
 
 chevronIngredients.addEventListener("click", () => {
@@ -103,10 +112,8 @@ applianceFilter.addEventListener("keyup", () => {
   const searchValue = applianceFilter.value;
   if(searchValue.length < 3){
     renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
-    recipesContainerRender(filteredRecipes);
   } else {
     renderAppliance(filteredRecipes, searchValue, applianceContainer, tagsList, tags)
-    recipesContainerRender(filteredRecipes);
   }
 });
 
@@ -131,14 +138,10 @@ ustensilsFilter.addEventListener("keyup", () => {
   const searchValue = ustensilsFilter.value;
   if(searchValue.length < 3){
     renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
-    recipesContainerRender(filteredRecipes);
   } else {
     renderUstensils(filteredRecipes, searchValue, ustensilsContainer, tagsList, tags)
-    recipesContainerRender(filteredRecipes);
   }
 });
-
-
 
 recipesContainer.innerHTML = recipesContainerRender(filteredRecipes);
 
