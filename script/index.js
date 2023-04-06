@@ -7,6 +7,9 @@ import {
   renderIngredients
 } from "./tagsFilters/index.js";
 import { nativeSearch } from "./nativeSearch.js";
+import { toggleAppliance } from "./tagsFilters/applianceFilter.js";
+import { toggleIngredients } from "./tagsFilters/ingredientsFilter.js";
+import { toggleUstensils } from "./tagsFilters/ustensilsFilter.js";
 
 const SEARCH_MODE = "functional";
 
@@ -36,11 +39,18 @@ search.addEventListener("keyup", () => {
       renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
       renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
       renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
+      toggleAppliance(filteredRecipes, tagsList);
+      toggleIngredients(filteredRecipes, tagsList);
+      toggleUstensils(filteredRecipes, tagsList);
+    } else {
+      filteredRecipes = searchFunctional(searchValue, recipes, tagsList);
+      renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
+      renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
+      renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
+      toggleAppliance(filteredRecipes, tagsList);
+      toggleIngredients(filteredRecipes, tagsList);
+      toggleUstensils(filteredRecipes, tagsList);
     }
-    filteredRecipes = searchFunctional(searchValue, recipes, tagsList);
-    renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
-    renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
-    renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
   } else {
     // native logic
     if (searchValue.length < 3) {
@@ -48,11 +58,12 @@ search.addEventListener("keyup", () => {
       renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
       renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
       renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
+    } else {
+      filteredRecipes = nativeSearch(searchValue, recipes, tagsList);
+      renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
+      renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
+      renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
     }
-    filteredRecipes = nativeSearch(searchValue, recipes, tagsList);
-    renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
-    renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
-    renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
   }
   // render
   if (filteredRecipes.length) {
