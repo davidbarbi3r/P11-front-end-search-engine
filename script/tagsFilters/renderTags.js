@@ -1,7 +1,6 @@
 import { recipesContainerRender } from "../recipesContainerRender.js";
 import { searchFunctional } from "../searchFunctional.js";
 import { toggleAppliance } from "./applianceFilter.js";
-import { renderAppliance, renderIngredients } from "./index.js";
 import { toggleIngredients } from "./ingredientsFilter.js";
 import { toggleUstensils } from "./ustensilsFilter.js";
 
@@ -11,7 +10,8 @@ export function renderTags(tagsList, recipes, search) {
   tags.innerHTML = tagsList
     .map((tag) => {
       return `
-            <button class="tag_btn">
+            <button class="tag_btn ${tag.type === "ustensil" ? "ustensil" :
+            tag.type === "appliance" ? "appliance" : "ingredient"}">
                 ${tag.tag}\u00A0\u00A0
                 <img class="close_btn" src="../../assets/cross.svg" alt="close"/>
             </button>
