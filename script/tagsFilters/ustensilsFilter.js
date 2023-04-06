@@ -1,8 +1,8 @@
 import { renderTags } from "./index.js";
-import { searchFunctional } from "../searchFunctional.js";
 import { recipesContainerRender } from "../recipesContainerRender.js";
 import { toggleIngredients } from "./ingredientsFilter.js";
 import { toggleAppliance } from "./applianceFilter.js";
+import { nativeSearch } from "../nativeSearch.js";
 
 // get ustensils tags from recipes and filter them if search input is not empty
 export function getUstensils(recipes, search) {
@@ -53,7 +53,7 @@ export function renderUstensils(recipes, search, containerEl, tagsList) {
         type: "ustensil",
       });
       renderTags(tagsList, recipes, search);
-      const filteredRecipes = searchFunctional(search, recipes, tagsList);
+      const filteredRecipes = nativeSearch(search, recipes, tagsList);
       const recipesContainer = document.querySelector(".recipes_container");
       recipesContainer.innerHTML = recipesContainerRender(filteredRecipes);
       toggleUstensils(filteredRecipes, tagsList);

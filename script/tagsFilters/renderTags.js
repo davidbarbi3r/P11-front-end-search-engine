@@ -1,5 +1,5 @@
+import { nativeSearch } from "../nativeSearch.js";
 import { recipesContainerRender } from "../recipesContainerRender.js";
-import { searchFunctional } from "../searchFunctional.js";
 import { toggleAppliance } from "./applianceFilter.js";
 import { toggleIngredients } from "./ingredientsFilter.js";
 import { toggleUstensils } from "./ustensilsFilter.js";
@@ -25,7 +25,7 @@ export function renderTags(tagsList, recipes, search) {
     el.addEventListener("click", () => {
       tagsList.splice(key, 1);
       renderTags(tagsList, recipes, search);
-      const filteredRecipes = searchFunctional(search, recipes, tagsList)
+      const filteredRecipes = nativeSearch(search, recipes, tagsList)
       toggleUstensils(filteredRecipes, tagsList)
       toggleIngredients(filteredRecipes, tagsList)
       toggleAppliance(filteredRecipes, tagsList)

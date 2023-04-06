@@ -23,7 +23,7 @@ export const nativeSearch = (search, recipes, tagsArray) => {
     }
 
     // filter recipes by tags
-    const filteredRecipesByTags = searchedRecipes.filter((recipe) => {
+    const filteredRecipesByTags = filteredRecipes.filter((recipe) => {
       const recipeTags = [
         recipe.appliance.toLowerCase(),
         ...recipe.ingredients.map((ingredient) =>

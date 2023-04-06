@@ -1,8 +1,8 @@
 import { renderTags } from "./index.js";
-import { searchFunctional } from "../searchFunctional.js";
 import { recipesContainerRender } from "../recipesContainerRender.js";
 import { toggleIngredients } from "./ingredientsFilter.js";
 import { toggleUstensils } from "./ustensilsFilter.js";
+import { nativeSearch } from "../nativeSearch.js";
 
 // get appliance tags from recipes and filter them if search input is not empty
 export function getAppliance(recipes, search) {
@@ -53,7 +53,7 @@ export function renderAppliance(recipes, search, containerEl, tagsList) {
         type: "appliance",
       });
       renderTags(tagsList, recipes, search);
-      const filteredRecipes = searchFunctional(search, recipes, tagsList);
+      const filteredRecipes = nativeSearch(search, recipes, tagsList);
       const recipesContainer = document.querySelector(".recipes_container");
       recipesContainer.innerHTML = recipesContainerRender(filteredRecipes);
       toggleAppliance(filteredRecipes, tagsList);
