@@ -1,3 +1,4 @@
+// render the recipes container with the filtered recipes
 export function recipesContainerRender(filteredRecipes){
     return `
     ${filteredRecipes.map((recipe) => {
