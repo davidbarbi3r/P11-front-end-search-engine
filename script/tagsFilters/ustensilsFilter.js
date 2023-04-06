@@ -2,7 +2,9 @@ import { renderTags } from "./index.js";
 import { searchFunctional } from "../searchFunctional.js";
 import { recipesContainerRender } from "../recipesContainerRender.js";
 import { toggleIngredients } from "./ingredientsFilter.js";
+import { toggleAppliance } from "./applianceFilter.js";
 
+// get ustensils tags from recipes and filter them if search input is not empty
 export function getUstensils(recipes, search) {
   if (!search) {
     return recipes
@@ -31,6 +33,7 @@ export function getUstensils(recipes, search) {
   return filteredUstensils;
 }
 
+// render ustensils tags and add event listener to them
 export function renderUstensils(recipes, search, containerEl, tagsList) {
   const filteredUstensils = getUstensils(recipes, search);
   containerEl.innerHTML = filteredUstensils
@@ -55,11 +58,13 @@ export function renderUstensils(recipes, search, containerEl, tagsList) {
       recipesContainer.innerHTML = recipesContainerRender(filteredRecipes);
       toggleUstensils(filteredRecipes, tagsList);
       toggleIngredients(filteredRecipes, tagsList);
+      toggleAppliance(filteredRecipes, tagsList);
     });
   });
   return filteredUstensils;
 }
 
+// toggle ustensils tags if they are not in recipes or if they are in tagsList
 export function toggleUstensils(recipes, tagsList) {
   const ustensils = getUstensils(recipes);
   const ustensilsTags = document.querySelectorAll(".ustensilBtnTag");

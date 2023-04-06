@@ -4,13 +4,7 @@ import { recipesContainerRender } from "../recipesContainerRender.js";
 import { toggleIngredients } from "./ingredientsFilter.js";
 import { toggleUstensils } from "./ustensilsFilter.js";
 
-export function filterAppliance(recipes, search) {
-  const filteredRecipesByAppliance = recipes.filter((recipe) => {
-    return recipe.appliance.includes(search.toLowerCase());
-  });
-  return filteredRecipesByAppliance;
-}
-
+// get appliance tags from recipes and filter them if search input is not empty
 export function getAppliance(recipes, search) {
   if (!search) {
     return recipes
@@ -39,7 +33,8 @@ export function getAppliance(recipes, search) {
   return filteredAppliance;
 }
 
-export function renderAppliance(recipes, search, containerEl, tagsList, tags) {
+// render appliance tags and add event listener to them
+export function renderAppliance(recipes, search, containerEl, tagsList) {
   const filteredAppliance = getAppliance(recipes, search);
   containerEl.innerHTML = filteredAppliance
     .map((appliance) => {
@@ -70,6 +65,7 @@ export function renderAppliance(recipes, search, containerEl, tagsList, tags) {
   return filteredAppliance;
 }
 
+// show or hide appliance tags depending on the recipes
 export function toggleAppliance(recipes, tagsList) {
   const appliance = getAppliance(recipes);
   const applianceTags = document.querySelectorAll(".applianceBtnTag");
