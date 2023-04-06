@@ -112,6 +112,10 @@ input[type="text" i]{
   color: white
 }
 
+#main_search,input[type="text" i]{
+  color: black
+}
+
 .ingredients_container button {
   border: none;
   color: white;
