@@ -6,12 +6,9 @@ import {
   renderUstensils,
   renderIngredients
 } from "./tagsFilters/index.js";
-import { nativeSearch } from "./nativeSearch.js";
 import { toggleAppliance } from "./tagsFilters/applianceFilter.js";
 import { toggleIngredients } from "./tagsFilters/ingredientsFilter.js";
 import { toggleUstensils } from "./tagsFilters/ustensilsFilter.js";
-
-const SEARCH_MODE = "functional";
 
 const search = document.querySelector("#main_search");
 const ingredientsFilter = document.querySelector("#filter_ingredients");
@@ -32,7 +29,6 @@ let filteredRecipes = recipes;
 search.addEventListener("keyup", () => {
   const searchValue = search.value;
 
-  if (SEARCH_MODE === "functional") {
     // functional logic
     if (searchValue.length < 3) {
       filteredRecipes = searchFunctional("", recipes, tagsList);
@@ -51,20 +47,7 @@ search.addEventListener("keyup", () => {
       toggleIngredients(filteredRecipes, tagsList);
       toggleUstensils(filteredRecipes, tagsList);
     }
-  } else {
-    // native logic
-    if (searchValue.length < 3) {
-      filteredRecipes = nativeSearch("", recipes, tagsList);
-      renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
-      renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
-      renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
-    } else {
-      filteredRecipes = nativeSearch(searchValue, recipes, tagsList);
-      renderIngredients(filteredRecipes, "", ingredientsContainer, tagsList, tags)
-      renderAppliance(filteredRecipes, "", applianceContainer, tagsList, tags)
-      renderUstensils(filteredRecipes, "", ustensilsContainer, tagsList, tags)
-    }
-  }
+
   // render
   if (filteredRecipes.length) {
     recipesContainer.innerHTML = recipesContainerRender(filteredRecipes);
