@@ -13,7 +13,7 @@ width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 92%;
   background: #E7E7E7;
   padding:15px;
   border-radius: 6px;
@@ -225,4 +225,19 @@ grid-template-columns: 1fr 1fr 1fr;
 
 .rotate {
 transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .tags_container {
+    flex-direction: column;
+    margin-left: 5px;
+  }
+
+  .input_control.input_control_1 {
+    margin-left: 5px;
+  }
+
+  .input_control_2 {
+    width: 300px;
+  }
 }
