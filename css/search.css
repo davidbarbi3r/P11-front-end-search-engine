@@ -1,228 +1,243 @@
 .container_logo {
-    display: flex;
-    padding: 0.9rem;
-    margin:auto;
+  display: flex;
+  padding: 0.9rem;
+  margin:auto;
 }
 
 .input_control {
-  width: 300px;
+width: 300px;
 }
 
 .input_control.input_control_1 {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    background: #E7E7E7;
-    padding:15px;
-    border-radius: 6px;
-    margin-bottom: 35px;
-}
-
-label img .container_logo {
-  width: 16px;
-  /* position:relative; */
-  padding-top: 3px;
-}
-
-.input_control, input_control-row input {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 92%;
   background: #E7E7E7;
   padding:15px;
   border-radius: 6px;
   margin-bottom: 35px;
 }
 
+label img .container_logo {
+width: 16px;
+/* position:relative; */
+padding-top: 3px;
+}
+
+.input_control, input_control-row input {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: #E7E7E7;
+padding:15px;
+border-radius: 6px;
+margin-bottom: 35px;
+}
+
 .input_control input {
-  font-size: 18px;
-  padding-left:10px;
-  outline: 0;
-  border:0;
-  background: #E7E7E7;
-  font-family: sans-serif, verdana;
-  color: black;
+font-size: 18px;
+padding-left:10px;
+outline: 0;
+border:0;
+background: #E7E7E7;
+font-family: sans-serif, verdana;
+color: black;
 }
 .tags_container {
-  align-items: flex-start;
-  justify-content: left;
-  display: flex;
+align-items: flex-start;
+justify-content: left;
+display: flex;
 }
 .input_control_2 {
-  margin-right: 25px;
-  background-color: #3282F7;
-  width: 50%;
+margin-right: 25px;
+background-color: #3282F7;
+width: 50%;
 }
 .input_control_2 input {
-  background-color:#3282F7;
+background-color:#3282F7;
 }
 .input_control_3 {
-  margin-right: 25px;
-  background-color: #68D9A4;
+margin-right: 25px;
+background-color: #68D9A4;
 } 
 .input_control_3 input {
-  background-color:#68D9A4;
+background-color:#68D9A4;
 }
 .input_control_4{
-  background-color: #ED6454;
+background-color: #ED6454;
 }
 .input_control_4 input {
-  background-color: #ED6454;
- 
+background-color: #ED6454;
+
 }
 .input_control_4 input::placeholder, .input_control_3 input::placeholder, .input_control_2 input::placeholder {
-  color:white;
-  padding-right: 23px;
+color:white;
+padding-right: 23px;
 } 
 .width_chevron {
-  width: 0.9rem;
+width: 0.9rem;
 }
 
 #ingredients_input {
-  position:relative;
+position:relative;
 }
 
 #appliance_input {
-  position:relative;
+position:relative;
 }
 
 #ustensils_input {
-  position:relative;
+position:relative;
 }
 
 .ingredients_container {
-  display: none;
-  background-color: #3282F7;
-  text-align: left;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 20px;
-  border-radius: 6px;
-  position: absolute;
-  width: 93%;
-  height: 100px;
-  top: 45px;
-  left: 0;
-  z-index: 1;
+display: none;
+background-color: #3282F7;
+text-align: left;
+overflow-y: scroll;
+overflow-x: hidden;
+padding: 20px;
+border-radius: 6px;
+position: absolute;
+width: 93%;
+height: 100px;
+top: 45px;
+left: 0;
+z-index: 1;
 }
 
 input[type="text" i]{
-  color: white
+color: white
 }
 
 #main_search,input[type="text" i]{
-  color: black
+color: black
 }
 
 .ingredients_container button {
-  border: none;
-  color: white;
-  background-color: #3282F7;
-  text-align: left;
+border: none;
+color: white;
+background-color: #3282F7;
+text-align: left;
 }
 
 .ingredients_container button:hover {
-  background-color: #2A6CC0;
-  cursor: pointer;
+background-color: #2A6CC0;
+cursor: pointer;
 }
 
 .appliance_container {
-  display: none;
-  background-color: #68D9A4;
-  text-align: left;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 15px;
-  border-radius: 6px;
-  position: absolute;
-  width: 90%;
-  height: 100px;
-  top: 45px;
-  left: 0;
-  z-index: 1;
+display: none;
+background-color: #68D9A4;
+text-align: left;
+overflow-y: scroll;
+overflow-x: hidden;
+padding: 15px;
+border-radius: 6px;
+position: absolute;
+width: 90%;
+height: 100px;
+top: 45px;
+left: 0;
+z-index: 1;
 }
 
 .appliance_container button {
-  border: none;
-  color: white;
-  background-color: #68D9A4;
-  text-align: left;
+border: none;
+color: white;
+background-color: #68D9A4;
+text-align: left;
 }
 
 .appliance_container button:hover {
-  background-color: #4DBF7F;
-  cursor: pointer;
+background-color: #4DBF7F;
+cursor: pointer;
 }
 
 .ustensils_container {
-  display: none;
-  background-color: #ED6454;
-  text-align: left;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 15px;
-  border-radius: 6px;
-  position: absolute;
-  width: 90%;
-  height: 100px;
-  top: 45px;
-  left: 0;
-  z-index: 1;
+display: none;
+background-color: #ED6454;
+text-align: left;
+overflow-y: scroll;
+overflow-x: hidden;
+padding: 15px;
+border-radius: 6px;
+position: absolute;
+width: 90%;
+height: 100px;
+top: 45px;
+left: 0;
+z-index: 1;
 }
 
 .ustensils_container button {
-  border: none;
-  color: white;
-  background-color: #ED6454;
-  text-align: left;
+border: none;
+color: white;
+background-color: #ED6454;
+text-align: left;
 }
 
 .ustensils_container button:hover {
-  background-color: #D54A3A;
-  cursor: pointer;
+background-color: #D54A3A;
+cursor: pointer;
 }
 
 .tags_list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  align-items: center;
-  padding: 0;
-  margin-bottom: 35px;
+display: flex;
+flex-wrap: wrap;
+justify-content: left;
+align-items: center;
+padding: 0;
+margin-bottom: 35px;
 }
 
 .tags_list button {
-  border: none;
-  color: white;
-  margin-right: 10px;
-  padding: 5px 10px;
-  border-radius: 6px;
+border: none;
+color: white;
+margin-right: 10px;
+padding: 5px 10px;
+border-radius: 6px;
 }
 
 .appliance {
-  background-color: #68D9A4;
+background-color: #68D9A4;
 }
 
 .ustensil {
-  background-color: #ED6454;
+background-color: #ED6454;
 }
 
 .ingredient {
-  background-color: #3282F7;
+background-color: #3282F7;
 }
 
 .tag_btn {
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 
 .open {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
 }
 
 .rotate {
-  transform: rotate(180deg);
+transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .tags_container {
+    flex-direction: column;
+    margin-left: 5px;
+  }
+
+  .input_control.input_control_1 {
+    margin-left: 5px;
+  }
+
+  .input_control_2 {
+    width: 300px;
+  }
 }
